@@ -6,6 +6,17 @@
       <link rel="stylesheet"
 href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
       <!-- <link rel="shortcut icon" href="../../images/taco.png"> -->
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      extensions: ["tex2jax.js"],
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], scale: 88},
+      tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+      TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "50%" } } },
+      messageStyle: "none"
+    });
+    </script>    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
       <script>
          function play(path) {{
            var player = document.getElementById('player');
@@ -245,9 +256,29 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
             <h1>Bilateral Denoising Diffusion Models (BDDMs)</h1>
          </header>
       </article>
-      <div>
+      <div align="justify">
       <p><b>Abstract:</b> Denoising diffusion models were designed with a simple forward process yet brought challenges for efficient sampling. Instead of striving for an accelerated sampler, we propose new bilateral denoising diffusion models (BDDMs) that parameterize the forward and reverse processes, with a score network and a scheduling network, respectively. From a bilateral modeling objective, we derive a tighter lower bound as a surrogate objective for the likelihood to achieve exceedingly high-quality and fast generation compared to other cutting-edge samplers. In particular, with a negligible training overhead, the proposed BDDMs generated significantly higher-quality samples with a 62x inference speed up relative to the denoising diffusion probabilistic models.
       </p>
+      <h3>
+        Comparing BDDM's derived objective againt the standard variational lower bound:
+      </h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+               <img src="imgs/step_loss.png" width="90%">
+            </td>
+            <td>
+               <img src="imgs/bounds.png" width="90%">
+            </td>
+          </tr>
+          <tr></tr>
+          <tr>
+            The left diagram compares the scheduling networks' outputs when training with $\mathcal{L}^{(t)}_\text{step}$ and $\mathcal{L}^{(t)}_\text{elbo}:=\mathbb{KL}\left(q_\phi(\mathbf{x}_{t-1}|\mathbf{x}_t,\mathbf{x}_0)||p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t)\right)$ respectively. The plot shows that when using $\mathcal{L}^{(t)}_\text{elbo}$ to learn $\phi$, the network output rapidly collapsed to zero; whereas, $\mathcal{L}^{(t)}_\text{step}$ fluctuates around 1. As $t$ is randomly drawn from an uniform distribution, fluctuation means that the network is able to learn a $t$-dependent noise scale. The right diagram shows the result of another experiment that validates the inequality of lower bounds: $\log p_{\theta^*} (\mathbf{x}_0)\geq \mathcal{F}^{(t)}_\text{bddm}\left(\theta^*, \underset{\phi}{\text{argmin}} \mathcal{L}_\text{step}^{(s)}(\phi;\theta^{*})\right)\geq \mathcal{F}^{(t)}_\text{elbo}(\theta^*):=\mathbb{KL}\left(q_{\boldsymbol\beta}(\mathbf{x}_{t-1}|\mathbf{x}_{t}, \mathbf{x}_{0})||p_{\theta^*}(\mathbf{x}_{t-1}|\mathbf{x}_{t})\right)$.
+            
+          </tr>
+        </tbody>
+      </table>
       <h3>
         Fast and high-fidelity speech generation using BDDMs:
       </h3>
