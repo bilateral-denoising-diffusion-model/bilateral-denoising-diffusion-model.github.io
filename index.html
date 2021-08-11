@@ -260,21 +260,31 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
       <p><b>Abstract:</b> Denoising diffusion models were designed with a simple forward process yet brought challenges for efficient sampling. Instead of striving for an accelerated sampler, we propose new bilateral denoising diffusion models (BDDMs) that parameterize the forward and reverse processes, with a score network and a scheduling network, respectively. From a bilateral modeling objective, we derive a tighter lower bound as a surrogate objective for the likelihood to achieve exceedingly high-quality and fast generation compared to other cutting-edge samplers. In particular, with a negligible training overhead, the proposed BDDMs generated significantly higher-quality samples with a 62x inference speed up relative to the denoising diffusion probabilistic models.
       </p>
       <h3>
-        Comparing BDDM's derived objective againt the standard variational lower bound:
+        Comparing BDDM with the standard ELBO objectives:
       </h3>
       <table>
         <tbody>
           <tr>
-            <td>
-               <img src="imgs/step_loss.png" width="90%">
+            <td width="40%" align="justify" valign="top">
+               <img src="imgs/step_loss.png" width="90%" style="padding-top:3%;">
+               <br/>
             </td>
-            <td>
-               <img src="imgs/bounds.png" width="90%">
+            <td width="40%" align="justify" valign="top" style="padding-top:1%;">
+               <img src="imgs/bounds.png" width="100%">
+               <br/>
             </td>
           </tr>
-          <tr></tr>
+        </tbody>
+      </table>
+      <table>
+        <tbody>
           <tr>
-            The left diagram compares the scheduling networks' outputs when training with $\mathcal{L}^{(t)}_\text{step}$ and $\mathcal{L}^{(t)}_\text{elbo}:=\mathbb{KL}\left(q_\phi(\mathbf{x}_{t-1}|\mathbf{x}_t,\mathbf{x}_0)||p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t)\right)$ respectively. The plot shows that when using $\mathcal{L}^{(t)}_\text{elbo}$ to learn $\phi$, the network output rapidly collapsed to zero; whereas, the network trained with $\mathcal{L}^{(t)}_\text{step}$ produced outputs fluctuating around 1. As $t$ is randomly drawn from an uniform distribution, fluctuation means that the network is able to learn a $t$-dependent noise scale. The right diagram shows the result of another experiment that validates the inequality of lower bounds: $\log p_{\theta^*} (\mathbf{x}_0)\geq \mathcal{F}^{(t)}_\text{bddm}\left(\theta^*, \underset{\phi}{\text{argmin}} \mathcal{L}_\text{step}^{(s)}(\phi;\theta^{*})\right)\geq \mathcal{F}^{(t)}_\text{elbo}(\theta^*):=\mathbb{KL}\left(q_{\boldsymbol\beta}(\mathbf{x}_{t-1}|\mathbf{x}_{t}, \mathbf{x}_{0})||p_{\theta^*}(\mathbf{x}_{t-1}|\mathbf{x}_{t})\right)$. We dropped the common entropy term $\mathbb{E}\left[\log p_\theta(\mathbf{x}_0|\mathbf{x}_1)\right] < 0$ to mainly compare the KL terms, therefore the lower bound might be positive. 
+            <td width="50%" align="justify" valign="top" style="padding-left: 5%;padding-right: 5%;">
+               Above diagram compares the scheduling networks' outputs when training with $\mathcal{L}^{(t)}_\text{step}$ and $\mathcal{L}^{(t)}_\text{elbo}$ respectively. The plot shows that when using $\mathcal{L}^{(t)}_\text{elbo}$ to learn $\phi$, the network output rapidly collapsed to zero; whereas, the network trained with $\mathcal{L}^{(t)}_\text{step}$ produced outputs fluctuating around 1. The fluctuation is desirable property indicating that the network is able to predict a $t$-dependent noise scale, where $t$ is a random time step drawn from an uniform distribution.
+            </td>
+            <td width="50%" align="justify" valign="top" style="padding-left: 8%;padding-right: 2%;">
+            Above diagram shows the result of another experiment that validates the inequality of lower bounds: $\mathcal{F}^{(t)}_\text{bddm} \geq \mathcal{F}^{(t)}_\text{elbo}(\theta^*)$ for different time step $t$. Each value is provided with 95% confidence intervals. We dropped the common entropy term $\mathbb{E}\left[\log p_\theta(\mathbf{x}_0|\mathbf{x}_1)\right] < 0$ to mainly compare the KL terms, therefore the plotted lower bound values might be positive.
+            </td>
           </tr>
         </tbody>
       </table>
