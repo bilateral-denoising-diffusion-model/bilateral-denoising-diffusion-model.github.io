@@ -10,7 +10,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
     MathJax.Hub.Config({
       jax: ["input/TeX", "output/HTML-CSS"],
       extensions: ["tex2jax.js"],
-      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], scale: 77},
+      "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], scale: 86},
       tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
       TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "50%" } } },
       messageStyle: "none"
@@ -280,7 +280,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
         <tbody>
           <tr>
             <td width="50%" align="justify" valign="top" style="padding-left: 5%;padding-right: 5%;">
-               The above diagram compares the scheduling networks' outputs when training with $\mathcal{L}^{(t)}_\text{step}$ and $\mathcal{L}^{(t)}_\text{elbo}$, respectively. The plot shows that when using $\mathcal{L}^{(t)}_\text{elbo}$ to learn $\phi$, the network output rapidly collapsed to zero within several training steps; whereas, the network trained with $\mathcal{L}^{(t)}_\text{step}$ produced outputs fluctuating around 1. The fluctuation is a desirable property indicating that the network can predict a $t$-dependent noise scale, where $t$ is a random time step drawn from an uniform distribution.
+               The above diagram compares the scheduling networks' outputs when training with $\mathcal{L}^{(t)}_\text{step}$ and $\mathcal{L}^{(t)}_\text{elbo}$, respectively. The plot shows that when using $\mathcal{L}^{(t)}_\text{elbo}$ to learn $\phi$, the network output rapidly collapsed to zero within several training steps; whereas, the network trained with $\mathcal{L}^{(t)}_\text{step}$ produced fluctuating values depending on $\tau$ (lower outputs for larger $\tau$). The fluctuation is a desirable property indicating that the network can predict a $t$-dependent noise scale, where $t$ is a random time step drawn at each training step from an uniform distribution.
             </td>
             <td width="50%" align="justify" valign="top" style="padding-left: 8%;padding-right: 2%;">
                 The above diagram shows the result of another experiment that validates the inequality of lower bounds: $\mathcal{F}^{(t)}_\text{bddm} \geq \mathcal{F}^{(t)}_\text{elbo}(\theta^*)$ for different time step $t$. We dropped their common entropy term $\mathbb{E}\left[\log p_\theta(\mathbf{x}_0|\mathbf{x}_1)\right] < 0$ to mainly compare the KL terms. Therefore, the plotted lower bound values might be positive. Each value is provided with 95% confidence intervals.
