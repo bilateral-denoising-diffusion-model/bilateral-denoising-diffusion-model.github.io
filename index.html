@@ -253,13 +253,15 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
      <div class="main">
        <article>
          <header>
-            <h1>Bilateral Denoising Diffusion Models (BDDMs)</h1>
+            <h1>BDDM: Bilateral Denoising Diffusion Models for Fast and High-Quality Speech Synthesis</h1>
          </header>
       </article>
       <div align="justify">
-      <p><b>Abstract:</b> Denoising diffusion probabilistic models (DDPMs) have emerged as competitive generative models yet brought challenges to efficient sampling. In this paper, we propose novel bilateral denoising diffusion models (BDDMs), which take significantly fewer steps to generate high-quality samples. From a bilateral modeling objective, BDDMs parameterize the forward and reverse processes with a score network and a scheduling network, respectively. We show that a new lower bound tighter than the standard evidence lower bound can be derived as a surrogate objective for training the two networks. In particular, BDDMs are efficient, simple-to-train, and capable of further improving any pre-trained DDPM by optimizing the inference noise schedules. Our experiments demonstrated that BDDMs can generate high-fidelity samples with as few as 3 sampling steps and produce comparable or even higher quality samples than DDPMs using 1000 steps with only 16 sampling steps (a 62x speedup).
+      <blockquote>
+      <p><b>Abstract:</b> Diffusion probabilistic models (DPMs) and their extensions have emerged as competitive generative models yet confront challenges of efficient sampling. We propose a new bilateral denoising diffusion model (BDDM) that parameterizes both the forward and reverse processes with a scheduling network and a score network, which can train with a novel bilateral modeling objective. We show that the new surrogate objective can achieve a lower bound of the log marginal likelihood tighter than a conventional surrogate. We also find that BDDM allows inheriting pre-trained score network parameters from any DPMs and consequently enables speedy and stable learning of the scheduling network and optimization of a noise schedule for sampling. Our experiments demonstrate that BDDMs can generate high-fidelity audio samples with as few as 3 sampling steps. Moreover, comparing to other state-of-the-art diffusion-based neural vocoders, BDDMs produce comparable or higher quality samples indistinguishable from human speech, notably with only 7 sampling steps (143x faster than WaveGrad and 28.6x faster than DiffWave).
       </p>
-      <h3>
+      </blockquote>
+      <!-- <h3>
         Comparing BDDM with the standard ELBO objectives:
       </h3>
       <table>
@@ -287,7 +289,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
       <h3>
         Fast and high-fidelity speech generation using BDDMs:
       </h3>
@@ -296,7 +298,8 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
          <!-- style="background-color: #FFFF00" -->
       </p>
       <p>
-	Text: <span class="text_e2e">Printing, in the only sense with which we are at present concerned, differs from most if not from all the arts and crafts represented in the Exhibition.</span>
+      <blockquote><p><b>Text:</b>
+      Printing, in the only sense with which we are at present concerned, differs from most if not from all the arts and crafts represented in the Exhibition.</p></blockquote>
       </p>
       <!-- WaveGrad outputs with <i>6 refinement steps:</i>      -->
       <p style="color:red;"><b></b></p>
@@ -306,7 +309,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
             <td nowrap><b>Step 0 (White Noise):</b> </td><td style="text-align:center" nowrap> Note: Consider lower volume before listening</td>
           </tr>
           <tr>
-            <td>
+            <td class="text_e2e">
                <audio controls="">
                   <source src="wavs/rand.wav">
                </audio>
@@ -319,7 +322,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
             <td nowrap><b>Step 1:</b> </td><td style="text-align:center" nowrap></td>
           </tr>
           <tr>
-            <td>
+            <td class="text_e2e">
                <audio controls="">
                   <source src="wavs/s1.wav">
                </audio>
@@ -332,7 +335,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
             <td nowrap><b>Step 2:</b> </td><td style="text-align:center" nowrap></td>
           </tr>
           <tr>
-            <td>
+            <td class="text_e2e">
                <audio controls="">
                   <source src="wavs/s2.wav">
                </audio>
@@ -345,7 +348,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
             <td nowrap><b>Step 3:</b> </td><td style="text-align:center" nowrap></td>
           </tr>
           <tr>
-            <td>
+            <td class="text_e2e">
                <audio controls="">
                   <source src="wavs/s3.wav">
                </audio>
@@ -356,7 +359,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
           </tr>
         </tbody>
       </table>
-         <h3> LJ speech samples from different generative diffusion models:</h3>
+         <h3> LJ speech samples generated from different neural vocoders:</h3>
          <p>
             <b>Note:</b>
             Different rows correspond to different noise schedules or sampling methods for inference.
@@ -365,98 +368,136 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
             <tbody>
                <tr>
                   <td nowrap> Text </td>
-                  <td><span class="text_e2e">and having, quote, somewhat bushy, end quote, hair.</span></td>
-                  <td><span class="text_e2e">since a disclosure of such detailed information relating to protective measures might undermine present methods of protecting the President.</span></td>
-                  <td><span class="text_e2e" style="color:white">since a disclosure of such detailed information relating to protective measures might undermine present methods of protecting the President.</span></td>
+                  <td class="text_e2e">Under the new rule visitors were not allowed to pass into the interior of the prison, but were detained between the grating.</td>
+                  <td class="text_e2e">This Commission can recommend no procedures for the future protection of our Presidents which will guarantee security.</td>
                </tr>
                <tr>
-                  <td nowrap>Ground Truth</td>
+                  <td nowrap class="text_method">Ground Truth</td>
                   <td>
                      <audio controls="">
-                        <source src="wavs/GT_3.wav">
+                        <source src="wavs/gt1.wav">
                      </audio>
                   </td>
                   <td>
                      <audio controls="">
-                        <source src="wavs/GT_4.wav">
-                     </audio>
-                  </td>
-               </tr>
-               <tr>
-                  <td nowrap>DDPM - 8 steps (Grid Search)</td>
-                  <td>
-                     <audio controls="">
-                        <source src="wavs/DDPM_8_3.wav">
-                     </audio>
-                  </td>
-                  <td>
-                     <audio controls="">
-                        <source src="wavs/DDPM_8_4.wav">
+                        <source src="wavs/gt2.wav">
                      </audio>
                   </td>
                </tr>
                <tr>
-                  <td nowrap>DDPM - 1000 steps (Linear)</td>
+                  <td nowrap class="text_method">WaveNet (MoL)</td>
                   <td>
                      <audio controls="">
-                        <source src="wavs/DDPM_1000_3.wav">
+                        <source src="wavs/wn1.wav">
                      </audio>
                   </td>
                   <td>
                      <audio controls="">
-                        <source src="wavs/DDPM_1000_4.wav">
-                     </audio>
-                  </td>
-               </tr>
-               <tr>
-                  <td nowrap>DDIM - 8 steps (Linear)</td>
-                  <td>
-                     <audio controls="">
-                        <source src="wavs/DDIM_8_3.wav">
-                     </audio>
-                  </td>
-                  <td>
-                     <audio controls="">
-                        <source src="wavs/DDIM_8_4.wav">
+                        <source src="wavs/wn2.wav">
                      </audio>
                   </td>
                </tr>
                <tr>
-                  <td nowrap>DDIM - 100 steps (Linear)</td>
+                  <td nowrap class="text_method">WaveGlow</td>
                   <td>
                      <audio controls="">
-                        <source src="wavs/DDIM_100_3.wav">
+                        <source src="wavs/glow1.wav">
                      </audio>
                   </td>
                   <td>
                      <audio controls="">
-                        <source src="wavs/DDIM_100_4.wav">
-                     </audio>
-                  </td>
-               </tr>
-               <tr>
-                  <td nowrap>NE - 8 steps (Linear)</td>
-                  <td>
-                     <audio controls="">
-                        <source src="wavs/NE_8_3.wav">
-                     </audio>
-                  </td>
-                  <td>
-                     <audio controls="">
-                        <source src="wavs/NE_8_4.wav">
+                        <source src="wavs/glow2.wav">
                      </audio>
                   </td>
                </tr>
                <tr>
-                  <td nowrap><b>BDDM - 8 steps</b></td>
+                  <td nowrap class="text_method">MelGAN</td>
                   <td>
                      <audio controls="">
-                        <source src="wavs/BDDM_8_3.wav">
+                        <source src="wavs/mel1.wav">
                      </audio>
                   </td>
                   <td>
                      <audio controls="">
-                        <source src="wavs/BDDM_8_4.wav">
+                        <source src="wavs/mel2.wav">
+                     </audio>
+                  </td>
+               </tr>
+               <tr>
+                  <td nowrap class="text_method">HiFi-GAN V1</td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/hifi1.wav">
+                     </audio>
+                  </td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/hifi2.wav">
+                     </audio>
+                  </td>
+               </tr>
+               <tr>
+                  <td nowrap class="text_method">WaveGrad</td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/wavegrad1.wav">
+                     </audio>
+                  </td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/wavegrad2.wav">
+                     </audio>
+                  </td>
+               </tr>
+               <tr>
+                  <td nowrap class="text_method">DiffWave</td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/diff1.wav">
+                     </audio>
+                  </td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/diff2.wav">
+                     </audio>
+                  </td>
+               </tr>
+               <tr>
+                  <td nowrap class="text_method"><b>BDDM - 3 steps</b></td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/3bddm1.wav">
+                     </audio>
+                  </td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/3bddm2.wav">
+                     </audio>
+                  </td>
+               </tr>
+               <tr>
+                  <td nowrap class="text_method"><b>BDDM - 7 steps</b></td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/7bddm1.wav">
+                     </audio>
+                  </td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/7bddm2.wav">
+                     </audio>
+                  </td>
+               </tr>
+               <tr>
+                  <td nowrap class="text_method"><b>BDDM - 12 steps</b></td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/12bddm1.wav">
+                     </audio>
+                  </td>
+                  <td>
+                     <audio controls="">
+                        <source src="wavs/12bddm2.wav">
                      </audio>
                   </td>
                </tr>
@@ -568,7 +609,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
                </tr>
             </tbody>
          </table>
-         <h3> CIFAR-10 samples generated from BDDM:</h3>
+         <!-- <h3> CIFAR-10 samples generated from BDDM:</h3>
          <table>
         <tbody>
           <tr>
@@ -582,7 +623,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.cs
             <td> <img src="imgs/BDDM100.png" width="300px"> </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
       </div>
    </body>
 </html>

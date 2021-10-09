@@ -33,13 +33,23 @@ body {
   margin-top: 10px;
 }
 .main {
-  max-width:950px;
+  max-width:1050px;
   margin: auto;
-  padding: 2% 5% 5% 5%;
+  padding: 2% 4% 4% 4%;
   border-left: 0px solid #999;
   border-right: 0px solid #999;
   border-bottom: 0px dashed #999;
   background-color: #fff;
+}
+
+blockquote {
+    margin: 0;
+}
+
+blockquote p {
+    padding: 15px;
+    background: #eee;
+    border-radius: 5px;
 }
 
 #toc_container {
@@ -75,10 +85,21 @@ h3 {
 .transcript {
   font-style: italic;
 }
+.text_method {
+  font-size: 11pt;
+  width: 250px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  text-align: "justify";
+}
 .text_e2e {
   font-style: italic;
   color: #666666;
   font-size: 11pt;
+  width: 250px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  text-align: "justify";
 }
 
 /* padding causes text to overlap buttons on e2e page */
